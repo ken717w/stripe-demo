@@ -37,3 +37,26 @@ php artisan serve
 ```
 
 Visit `localhost:8000`
+
+# Data Structure
+Tables: `customers`, `payments`
+
+Such information are stored in Stripe as well. For simplicity, only necessary copies of data (such as customer email for order searching) are stored in database.
+
+## Customers
+* id: int
+* stripe_ref: string
+* name<sup>#</sup>: string
+* email: string
+* phone<sup>#</sup>: string
+* created_at: timestamp
+* updated_at: timestamp
+
+<sup>#</sup>Name and phone are updated every time a customer creates a new order using the same email.
+
+## Payments
+* id: int
+* stripe_ref: string
+* customer_id: int, FK to `customers.id`
+* created_at: timestamp
+* updated_at: timestamp
